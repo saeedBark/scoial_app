@@ -1,11 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:social_app/layout/layout.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:social_app/screen/login/login_screen.dart';
+import 'package:social_app/style/bloc_observe.dart';
 
-void main() {
-  runApp( MyApp());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = MyBlocObserver();
+  await Firebase.initializeApp();
+  runApp( SocialApp());
 }
 
-class MyApp extends StatelessWidget {
+class SocialApp extends StatelessWidget {
 
 
   // This widget is the root of your application.
@@ -14,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
-      home:  LayoutScreen(),
+      home:  LoginScreen(),
     );
   }
 }
