@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:social_app/remote/sharedPreference/shared_preference.dart';
 import 'package:social_app/style/colors.dart';
 
 Widget defaultText(
@@ -77,3 +78,5 @@ Widget defaultButton({
   );
 }
 /////////
+
+var uId = '';

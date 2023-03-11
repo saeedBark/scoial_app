@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:social_app/componets/componets.dart';
+import 'package:social_app/layout/layout.dart';
+import 'package:social_app/remote/sharedPreference/shared_preference.dart';
 import 'package:social_app/screen/login/cubit/cubit.dart';
 import 'package:social_app/screen/login/cubit/state.dart';
 import 'package:social_app/screen/register/register_screen.dart';
@@ -19,22 +21,27 @@ class LoginScreen extends StatelessWidget {
       create: (context) => LoginCubit(),
       child: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
-         if(state is LoginErrorState){
-           Fluttertoast.showToast(
-               msg: "This is Center Short Toast",
-               toastLength: Toast.LENGTH_SHORT,
-               gravity: ToastGravity.CENTER,
-               timeInSecForIosWeb: 1,
-               backgroundColor: Colors.red,
-               textColor: Colors.white,
-               fontSize: 16.0
-           );
-         }
+          if (state is LoginErrorState) {
+            Fluttertoast.showToast(
+                msg: state.error,
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+                fontSize: 16.0);
+          }
+          if (state is LoginSuccessState) {
+            SharedPreferenceCach.saveData(key: 'uId', value: state.uId)
+                .then((value) {
+              navigatorAndReplace(context, LayoutScreen());
+            });
+          }
         },
         builder: (context, state) {
           var cubit = LoginCubit.get(context);
           return Scaffold(
-         //   appBar: AppBar(),
+            //   appBar: AppBar(),
             body: Center(
               child: SingleChildScrollView(
                 child: Padding(
@@ -45,10 +52,10 @@ class LoginScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         defaultText(
-                            text: 'LOGIN',
-                            fontSize: 24,
-                            fontWeidght: FontWeight.bold,
-                            color: defaultColor,
+                          text: 'LOGIN',
+                          fontSize: 24,
+                          fontWeidght: FontWeight.bold,
+                          color: defaultColor,
                         ),
                         const SizedBox(
                           height: 10,
@@ -97,22 +104,21 @@ class LoginScreen extends StatelessWidget {
                         ),
                         ConditionalBuilder(
                           condition: state is! LoginLoadingState,
-                          builder: (context) =>
-                              defaultButton(
-                                fanction: () {
-                                  if (formkey.currentState.validate()) {
-                                    cubit.userLogin(
-                                        email: emailController.text,
-                                        password: passwordController.text);
-                                    //  print('saeed');
-                                    // navigatorAndReplace(context, LayoutScreen());
-                                  }
-                                },
-                                text: 'LOgin',
-                                isUpperCase: true,
-                              ),
+                          builder: (context) => defaultButton(
+                            fanction: () {
+                              if (formkey.currentState.validate()) {
+                                cubit.userLogin(
+                                    email: emailController.text,
+                                    password: passwordController.text);
+                                //  print('saeed');
+                                // navigatorAndReplace(context, LayoutScreen());
+                              }
+                            },
+                            text: 'LOgin',
+                            isUpperCase: true,
+                          ),
                           fallback: (context) =>
-                          const Center(child: CircularProgressIndicator()),
+                              const Center(child: CircularProgressIndicator()),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,

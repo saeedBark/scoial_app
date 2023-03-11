@@ -12,9 +12,9 @@ class LoginChangePasswordShowState extends LoginState{}
 class LoginLoadingState extends LoginState{}
 
 class LoginSuccessState extends LoginState{
-  // late UserLoginModel mod;
-  //
-  // LoginSuccessState(this.mod);
+ final  String uId;
+
+  LoginSuccessState(this.uId);
 
 }
 

@@ -11,11 +11,7 @@ class RegisterChangePasswordShowState extends RegisterState {}
 /////////// userDataPost/////
 class RegisterLoadingState extends RegisterState {}
 
-class RegisterSuccessState extends RegisterState {
-  // late UserLoginModel mod;
-  //
-  // RegisterSuccessState(this.mod);
-}
+class RegisterSuccessState extends RegisterState {}
 
 class RegisterErrorState extends RegisterState {
   final String error;
@@ -23,4 +19,8 @@ class RegisterErrorState extends RegisterState {
   RegisterErrorState(this.error);
 }
 
-///////////
+class RegisterCreateUserState extends RegisterState{}
+
+class RegisterCreateUserSuccessState extends RegisterState{}
+
+class RegisterCreateUserErrorState extends RegisterState{}
