@@ -18,6 +18,7 @@ class SocialCubit extends Cubit<SocialState> {
         .get()
         .then((value) {
           print(value.data());
+          userModel = UserModel.formjson(value.data());
           emit(SocialGetUserSuccessState());
     })
         .catchError((error) {

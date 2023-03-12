@@ -3,7 +3,8 @@ import 'package:social_app/remote/sharedPreference/shared_preference.dart';
 import 'package:social_app/style/colors.dart';
 
 Widget defaultText(
-    { String text,
+    {
+      String text,
       double fontSize,
       FontWeight fontWeidght,
       Color color}) {
@@ -13,6 +14,7 @@ Widget defaultText(
       color: color,
       fontWeight: fontWeidght,
       fontSize: fontSize,
+
     ),
   );
 }
@@ -53,7 +55,7 @@ pushAndRemoveUntil(context, MaterialPageRoute(builder: (contex) => widget ), (ro
 
 Widget defaultButton({
   Color color = defaultColor,
-  double width = double.infinity,
+  double width = 120,
   double raduis = 15,
   bool isUpperCase = true,
   @required Function fanction,
@@ -68,7 +70,7 @@ Widget defaultButton({
       },
       child: Text(
         isUpperCase ? text.toUpperCase() : text,
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(color: Colors.blue),
       ),
     ),
     decoration: BoxDecoration(
@@ -79,4 +81,4 @@ Widget defaultButton({
 }
 /////////
 
-var uId = '';
+var uId = SharedPreferenceCach.getData(key: 'uId');

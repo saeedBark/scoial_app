@@ -14,7 +14,7 @@ void main() async {
   await Firebase.initializeApp();
   await SharedPreferenceCach.inti();
 
-  uId = SharedPreferenceCach.getData(key: 'uId');
+
 
   Widget widget;
   if (uId != null) {
@@ -32,7 +32,8 @@ class SocialApp extends StatelessWidget {
   //final String uid;
   final Widget starWidget;
 
-  const SocialApp({Key key, this.starWidget}) : super(key: key);
+
+  const SocialApp({Key key, this.starWidget, }) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -41,6 +42,7 @@ class SocialApp extends StatelessWidget {
       create: (context) => SocialCubit()..getUser(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+
         home: starWidget,
       ),
     );

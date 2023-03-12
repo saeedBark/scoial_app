@@ -28,10 +28,10 @@ class SharedPreferenceCach{
       return await sharedPreference.setBool(key, value);
   }
 
-  // static Future<dynamic> logout({
-  //   @required String key,
-  // }) async{
-  //   return await sharedPreference.remove(key);
-  // }
+  static Future<dynamic> logout({
+    @required String key,
+  }) async{
+    return await sharedPreference.remove(key);
+  }
 
 }
