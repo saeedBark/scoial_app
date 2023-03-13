@@ -18,60 +18,28 @@ class LayoutScreen extends StatelessWidget {
         // TODO: implement listener
       },
       builder: (context, state) {
-        var cubit = SocialCubit.get(context).userModel;
+        var cubit = SocialCubit.get(context);
         return Scaffold(
           appBar: AppBar(
             title: Text(
-              'News Feed',
+              cubit.title[cubit.currentIndex],
               style: TextStyle(color: Colors.black),
             ),
-            backgroundColor: Colors.white,
-            elevation: 0,
+            actions: [
+              IconButton(onPressed: (){}, icon: Icon(Icons.notification_important_outlined)),
+              IconButton(onPressed: (){}, icon: Icon(Icons.search)),
+            ],
+            // backgroundColor: Colors.white,
+            // elevation: 0,
           ),
-          body: ConditionalBuilder(
-            condition: cubit != null,
-            builder: (context) => Column(
-              children: [
-                if(!FirebaseAuth.instance.currentUser.emailVerified)
-                Container(
-                  height: 50,
-                  color: Colors.amber.withOpacity(0.6),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Icon(Icons.info_outline),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text('please verify your email '),
-                        Spacer(),
-                        TextButton(
-                            onPressed: () {
-                              FirebaseAuth.instance.currentUser.sendEmailVerification().then((value){
-                                Fluttertoast.showToast(
-                                    msg: 'check email',
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    gravity: ToastGravity.BOTTOM,
-                                    timeInSecForIosWeb: 1,
-                                    backgroundColor: Colors.green,
-                                    textColor: Colors.white,
-                                    fontSize: 16.0);
-                              }).catchError((error){
-                                print(error.toString());
-                              });
-                            },
-                            child: Text(
-                              'SEND',
-                              style: TextStyle(color: Colors.blue),
-                            ))
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
-            fallback: (context) => Center(child: CircularProgressIndicator()),
+          body: cubit.screen[cubit.currentIndex],
+          bottomNavigationBar: BottomNavigationBar(
+
+            currentIndex: cubit.currentIndex,
+            items: cubit.bottomNavgatebar,
+            onTap: (int index) {
+              cubit.changeBottom(index);
+            },
           ),
         );
       },
