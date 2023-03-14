@@ -158,116 +158,119 @@ class FeedScreen extends StatelessWidget {
                           fit: BoxFit.cover,
                         ),
                       )),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: InkWell(
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.favorite_outline,
-                                size: 18,
-                                color: Colors.red,
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                '350',
-                                style: Theme.of(context).textTheme.bodySmall,
-                              )
-                            ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: InkWell(
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.favorite_outline,
+                                  size: 18,
+                                  color: Colors.red,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  '350',
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                )
+                              ],
+                            ),
+                            onTap: () {},
                           ),
-                          onTap: () {},
                         ),
-                      ),
-                      Expanded(
-                        child: InkWell(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Icon(
-                                Icons.chat,
-                                size: 18,
-                                color: Colors.amber,
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                '910 comment',
-                                style: Theme.of(context).textTheme.bodySmall,
-                              )
-                            ],
+                        Expanded(
+                          child: InkWell(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Icon(
+                                  Icons.chat,
+                                  size: 18,
+                                  color: Colors.amber,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  '910 comment',
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                )
+                              ],
+                            ),
+                            onTap: () {},
                           ),
-                          onTap: () {},
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   Container(
                     height: 1,
                     width: double.infinity,
                     color: Colors.grey[300],
                   ),
-                  Row(
-                    children: [
-                      Row(
-                        children: [
-                          CircleAvatar(
-                            radius: 25,
-                            backgroundImage: NetworkImage(
-                                'https://www.sayidaty.net/sites/default/files/styles/600x380/public/2023-03/222113.jpg?h=ea95bb15'),
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Saeed bark',
-                                      style: TextStyle(
-                                        height: 1.3,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 6,
-                                    ),
-                                    Icon(
-                                      Icons.check_circle,
-                                      color: Colors.blue,
-                                      size: 17,
-                                    ),
-                                  ],
-                                ),
-                                Text(
-                                  'march 21,5,2023 at 10: pm',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      .copyWith(
-                                        height: 1.3,
-                                      ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.more_horiz),
-                          ),
-                        ],
-                      ),
-                    ],
-                  )
-
+                  // Row(
+                  //   children: [
+                  //     Row(
+                  //       children: [
+                  //         CircleAvatar(
+                  //           radius: 25,
+                  //           backgroundImage: NetworkImage(
+                  //               'https://www.sayidaty.net/sites/default/files/styles/600x380/public/2023-03/222113.jpg?h=ea95bb15'),
+                  //         ),
+                  //         SizedBox(
+                  //           width: 20,
+                  //         ),
+                  //         Expanded(
+                  //           child: Column(
+                  //             crossAxisAlignment: CrossAxisAlignment.start,
+                  //             children: [
+                  //               Row(
+                  //                 children: [
+                  //                   Text(
+                  //                     'Saeed bark',
+                  //                     style: TextStyle(
+                  //                       height: 1.3,
+                  //                     ),
+                  //                   ),
+                  //                   SizedBox(
+                  //                     width: 6,
+                  //                   ),
+                  //                   Icon(
+                  //                     Icons.check_circle,
+                  //                     color: Colors.blue,
+                  //                     size: 17,
+                  //                   ),
+                  //                 ],
+                  //               ),
+                  //               Text(
+                  //                 'march 21,5,2023 at 10: pm',
+                  //                 style: Theme.of(context)
+                  //                     .textTheme
+                  //                     .bodySmall
+                  //                     .copyWith(
+                  //                       height: 1.3,
+                  //                     ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //         ),
+                  //         SizedBox(
+                  //           width: 15,
+                  //         ),
+                  //         IconButton(
+                  //           onPressed: () {},
+                  //           icon: Icon(Icons.more_horiz),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ],
+                  // )
+                  //
                 ],
               ),
             ),
