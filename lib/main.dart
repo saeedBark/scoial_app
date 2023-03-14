@@ -57,9 +57,11 @@ class SocialApp extends StatelessWidget {
               )),
           scaffoldBackgroundColor: Colors.white,
           primarySwatch: Colors.pink,
-          textTheme: const TextTheme(
-            titleLarge: TextStyle(color: Colors.black, fontSize: 20),
+          textTheme:  TextTheme(
+            titleLarge: TextStyle(color: Colors.black, fontSize: 14),
+            titleMedium:  TextStyle(color: Colors.black, fontSize: 14,height: 1.3,fontWeight: FontWeight.bold),
           ),
+
           bottomNavigationBarTheme: const BottomNavigationBarThemeData(
             type: BottomNavigationBarType.fixed,
             showUnselectedLabels: true,
