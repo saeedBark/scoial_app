@@ -9,13 +9,16 @@ import 'package:social_app/layout/cubit/cubit.dart';
 import 'package:social_app/layout/cubit/state.dart';
 import 'package:social_app/remote/sharedPreference/shared_preference.dart';
 import 'package:social_app/screen/login/login_screen.dart';
+import 'package:social_app/screen/post/newPost_screen.dart';
 
 class LayoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SocialCubit, SocialState>(
       listener: (context, state) {
-        // TODO: implement listener
+       if(state is SocialNewPostState){
+         Navigator.push(context, MaterialPageRoute(builder: (context) => NewPostScreen()));
+       }
       },
       builder: (context, state) {
         var cubit = SocialCubit.get(context);

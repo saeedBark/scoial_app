@@ -56,7 +56,7 @@ pushAndRemoveUntil(context, MaterialPageRoute(builder: (contex) => widget ), (ro
 Widget defaultButton({
   Color color = defaultColor,
   double width = 120,
-  double raduis = 15,
+  double raduis = 5,
   bool isUpperCase = true,
   @required Function fanction,
   @required String text,
@@ -70,7 +70,7 @@ Widget defaultButton({
       },
       child: Text(
         isUpperCase ? text.toUpperCase() : text,
-        style: TextStyle(color: Colors.blue),
+        style: TextStyle(color: Colors.white),
       ),
     ),
     decoration: BoxDecoration(

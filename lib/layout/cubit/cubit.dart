@@ -6,6 +6,7 @@ import 'package:social_app/layout/cubit/state.dart';
 import 'package:social_app/model/usreRegister_model.dart';
 import 'package:social_app/screen/chat/chat_screen.dart';
 import 'package:social_app/screen/feed/feed_screen.dart';
+import 'package:social_app/screen/post/newPost_screen.dart';
 import 'package:social_app/screen/setting/setting_screen.dart';
 import 'package:social_app/screen/users/users_screen.dart';
 
@@ -24,6 +25,7 @@ class SocialCubit extends Cubit<SocialState> {
         .then((value) {
           print(value.data());
           userModel = UserModel.formjson(value.data());
+          print(userModel.name);
           emit(SocialGetUserSuccessState());
     })
         .catchError((error) {
@@ -36,24 +38,33 @@ class SocialCubit extends Cubit<SocialState> {
    List<Widget> screen = [
      FeedScreen(),
      ChatScreen(),
+     NewPostScreen(),
      UsersScreen(),
      SettingScreen(),
    ];
    List<String> title = [
      'Home',
      'Chat',
+     'Post',
      'User',
      'Setting',
    ];
    List<BottomNavigationBarItem> bottomNavgatebar = [
-     BottomNavigationBarItem(icon: Icon(Icons.home_outlined),label: 'Home'),
-     BottomNavigationBarItem(icon: Icon(Icons.chat_outlined),label: 'Chat'),
-     BottomNavigationBarItem(icon: Icon(Icons.supervised_user_circle_sharp),label: 'Users'),
-     BottomNavigationBarItem(icon: Icon(Icons.settings_outlined),label: 'Setting'),
+     const BottomNavigationBarItem(icon: Icon(Icons.home_outlined),label: 'Home'),
+     const BottomNavigationBarItem(icon: Icon(Icons.chat_outlined),label: 'Chat'),
+     const BottomNavigationBarItem(icon: Icon(Icons.post_add_outlined),label: 'Post'),
+     const BottomNavigationBarItem(icon: Icon(Icons.supervised_user_circle_sharp),label: 'Users'),
+     const BottomNavigationBarItem(icon: Icon(Icons.settings_outlined),label: 'Setting'),
    ];
 
    void changeBottom(int index){
-     currentIndex = index;
-     emit(SocialChangeBottomState());
+
+     if(index == 2) {
+       emit(SocialNewPostState());
+     }
+     else {
+       currentIndex = index;
+       emit(SocialChangeBottomState());
+     }
    }
 }

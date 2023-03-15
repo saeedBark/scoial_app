@@ -9,3 +9,5 @@ class SocialGetUserSuccessState extends SocialState{}
 class SocialGetUserErrorState extends SocialState{}
 
 class SocialChangeBottomState extends SocialState{}
+
+class SocialNewPostState extends SocialState{}

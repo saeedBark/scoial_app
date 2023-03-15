@@ -56,7 +56,7 @@ class SocialApp extends StatelessWidget {
                 color: Colors.black,
               )),
           scaffoldBackgroundColor: Colors.white,
-          primarySwatch: Colors.pink,
+          primarySwatch: Colors.blue,
           textTheme:  TextTheme(
             titleLarge: TextStyle(color: Colors.black, fontSize: 14),
             titleMedium:  TextStyle(color: Colors.black, fontSize: 14,height: 1.3,fontWeight: FontWeight.bold),
