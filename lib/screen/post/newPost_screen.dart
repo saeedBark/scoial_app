@@ -8,3 +8,4 @@ class NewPostScreen extends StatelessWidget {
     return Center(child: Text('add post'));
   }
 }
+

@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:social_app/componets/componets.dart';
 import 'package:social_app/layout/cubit/cubit.dart';
 import 'package:social_app/layout/cubit/state.dart';
 
 class SettingScreen extends StatelessWidget {
 
-
   @override
   Widget build(BuildContext context) {
-    return  BlocConsumer<SocialCubit, SocialState>(
+    return BlocConsumer<SocialCubit, SocialState>(
     listener: (context, state) {
       // TODO: implement listener
     },
@@ -31,13 +29,13 @@ class SettingScreen extends StatelessWidget {
                         height: 140,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
+                          borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(4),
                             topRight: Radius.circular(4),
                           ),
                           image:  DecorationImage(
                             image: NetworkImage(
-                             userModel.cover,
+                            userModel.cover,
                             ),
                             fit: BoxFit.cover,
                           ),
@@ -62,9 +60,9 @@ class SettingScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
             Text(userModel.name,style: Theme.of(context).textTheme.bodyLarge,),
-            SizedBox(height: 5,),
+            const SizedBox(height: 5,),
             Text(userModel.bio,style: Theme.of(context).textTheme.bodySmall,),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20,),
@@ -118,17 +116,17 @@ class SettingScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
             Row(
               children: [
                 Expanded(child: OutlinedButton(
                   onPressed: (){},
-                  child: Text('Add Photos',),
+                  child: const Text('Add Photos',),
                 ),),
-                SizedBox(width: 10,),
+                const SizedBox(width: 10,),
                 OutlinedButton(
                   onPressed: (){},
-                  child: Icon(Icons.edit,),
+                  child: const Icon(Icons.edit,),
                 ),
               ],
             ),

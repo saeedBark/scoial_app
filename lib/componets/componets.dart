@@ -50,9 +50,25 @@ Widget defaultFormFile({
 ////////////////
 Future navigatorAndReplace(context , widget) =>  Navigator.
 pushAndRemoveUntil(context, MaterialPageRoute(builder: (contex) => widget ), (route) => false);
-/////////
+///////// defaultAppBarr new post/////
+Widget defaultAppBarr({
+@required String title,
+@required List<Widget> action,
+@required  context,
 
-
+}){
+  return AppBar(
+    title: Text(title),
+    leading: IconButton(
+        onPressed: (){
+          Navigator.pop(context);
+        },
+      icon: Icon(Icons.arrow_back),
+    ),
+    actions: action,
+  );
+}
+//////
 Widget defaultButton({
   Color color = defaultColor,
   double width = 120,

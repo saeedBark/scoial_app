@@ -1,5 +1,4 @@
 
-
 class UserModel{
   String name ;
   String email;
