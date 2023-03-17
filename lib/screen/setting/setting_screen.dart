@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/layout/cubit/cubit.dart';
 import 'package:social_app/layout/cubit/state.dart';
+import 'package:social_app/screen/edit_profile/edit_profile_screen.dart';
 
 class SettingScreen extends StatelessWidget {
 
@@ -116,7 +117,7 @@ class SettingScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 10,),
+            const SizedBox(height: 30,),
             Row(
               children: [
                 Expanded(child: OutlinedButton(
@@ -125,7 +126,9 @@ class SettingScreen extends StatelessWidget {
                 ),),
                 const SizedBox(width: 10,),
                 OutlinedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>EditProfileScreen()));
+                  },
                   child: const Icon(Icons.edit,),
                 ),
               ],

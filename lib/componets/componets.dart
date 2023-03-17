@@ -52,18 +52,19 @@ Future navigatorAndReplace(context , widget) =>  Navigator.
 pushAndRemoveUntil(context, MaterialPageRoute(builder: (contex) => widget ), (route) => false);
 ///////// defaultAppBarr new post/////
 Widget defaultAppBarr({
-@required String title,
+ String title,
 @required List<Widget> action,
 @required  context,
 
 }){
   return AppBar(
     title: Text(title),
+    titleSpacing: 5,
     leading: IconButton(
         onPressed: (){
           Navigator.pop(context);
         },
-      icon: Icon(Icons.arrow_back),
+      icon: Icon(Icons.arrow_back_ios),
     ),
     actions: action,
   );
