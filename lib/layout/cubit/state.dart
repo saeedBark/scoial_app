@@ -16,6 +16,19 @@ class SocialProfileImagePickerSuccessState extends SocialState{}
 
 class SocialProfileImagePickerErrorState extends SocialState{}
 
-class SocialProfileCoverPickerSuccessState extends SocialState{}
+class SocialCoverImagePickerSuccessState extends SocialState{}
 
-class SocialProfileCoverPickerErrorState extends SocialState{}
+class SocialCoverImagePickerErrorState extends SocialState{}
+
+class SocialUploadProfileImageSuccessState extends SocialState{}
+
+class SocialUploadProfileImageErrorState extends SocialState{}
+
+class SocialUploadCoverImageSuccessState extends SocialState{}
+
+class SocialUploadCoverImageErrorState extends SocialState{}
+
+class SocialUdateUserErrorState extends SocialState{}
+
+class SocialUdateUserLoadingState extends SocialState{}
+
