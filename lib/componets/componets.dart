@@ -72,7 +72,7 @@ Widget defaultAppBarr({
 //////
 Widget defaultButton({
   Color color = defaultColor,
-  double width = 120,
+  double width = double.infinity,
   double raduis = 5,
   bool isUpperCase = true,
   @required Function fanction,

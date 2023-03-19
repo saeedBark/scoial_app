@@ -31,4 +31,18 @@ class SocialUploadCoverImageErrorState extends SocialState{}
 class SocialUdateUserErrorState extends SocialState{}
 
 class SocialUdateUserLoadingState extends SocialState{}
+///// picker image post //////
+
+class SocialPostImagePickerSuccessState extends SocialState{}
+
+class SocialPostImagePickerErrorState extends SocialState{}
+
+//////////create post///////////
+class SocialCreatePostLoadingState extends SocialState{}
+
+class SocialCreatePostSuccessState extends SocialState{}
+
+class SocialCreatePostErrorState extends SocialState{}
+
+
 

@@ -19,6 +19,7 @@ class EditProfileScreen extends StatelessWidget {
         // TODO: implement listener
       },
       builder: (context, state) {
+        var cubit = SocialCubit.get(context);
         var userModel = SocialCubit.get(context).userModel;
         var profileImage = SocialCubit.get(context).profileImage;
         var coverImage = SocialCubit.get(context).coverImage;
@@ -32,7 +33,7 @@ class EditProfileScreen extends StatelessWidget {
             action: [
               TextButton(
                 onPressed: () {
-                  SocialCubit.get(context).updateUser(
+                  cubit.updateUser(
                     name: nameController.text,
                     bio: bioController.text,
                     phone: phoneController.text,
@@ -54,7 +55,7 @@ class EditProfileScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  if(state is SocialUdateUserLoadingState)
+                  if (state is SocialUdateUserLoadingState)
                     LinearProgressIndicator(),
                   Container(
                     height: 190,
@@ -106,7 +107,8 @@ class EditProfileScreen extends StatelessWidget {
                             Container(
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: Theme.of(context).scaffoldBackgroundColor,
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
                               ),
                               child: CircleAvatar(
                                 radius: 55,
@@ -136,8 +138,57 @@ class EditProfileScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 25,
+                    height: 20,
                   ),
+                  if (cubit.profileImage != null || cubit.coverImage != null)
+                    Row(
+                      children: [
+                        if (cubit.profileImage != null)
+                          Expanded(
+                              child: Column(
+                            children: [
+                              defaultButton(
+                                  fanction: () {
+                                    cubit.uploadProfileImage(
+                                      name: nameController.text,
+                                      phone: phoneController.text,
+                                      bio: bioController.text,
+                                    );
+                                  },
+                                  text: 'Upload Profile '),
+                              if (state is SocialUdateUserLoadingState)
+                              SizedBox(height: 5,),
+                              if (state is SocialUdateUserLoadingState)
+                              LinearProgressIndicator(),
+                            ],
+                          )),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        if (cubit.coverImage != null)
+                          Expanded(
+                              child: Column(
+                            children: [
+                              defaultButton(
+                                  fanction: () {
+                                    cubit.uploadCoverImage(
+                                        name: nameController.text,
+                                        phone: phoneController.text,
+                                        bio: bioController.text);
+                                  },
+                                  text: 'Upload Cover '),
+                              if (state is SocialUdateUserLoadingState)
+                              SizedBox(height: 5,),
+                              if (state is SocialUdateUserLoadingState)
+                              LinearProgressIndicator(),
+                            ],
+                          )),
+                      ],
+                    ),
+                  if (cubit.profileImage != null || cubit.coverImage != null)
+                    SizedBox(
+                      height: 25,
+                    ),
                   defaultFormFile(
                     controller: nameController,
                     lable: 'name',
