@@ -53,5 +53,8 @@ class SocialGetPostsSuccessState extends SocialState{}
 
 class SocialGetPostsErrorState extends SocialState{}
 
+//////// Likes ////////
+class SocialLikesPostSuccessState extends SocialState{}
 
+class SocialLikesPostErrorState extends SocialState{}
 

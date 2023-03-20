@@ -15,7 +15,7 @@ class FeedScreen extends StatelessWidget {
   builder: (context, state) {
     var cubit = SocialCubit.get(context);
     return ConditionalBuilder(
-      condition:cubit.posts.length > 0,
+      condition:cubit.posts.length > 0 && cubit.userModel != null,
       builder: (context) => SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -28,7 +28,7 @@ class FeedScreen extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 children: [
                   Image.network(
-                    'https://www.eu-startups.com/wp-content/uploads/2022/10/Screen-Shot-2022-10-04-at-10.06.13.png',
+                    cubit.userModel.cover,
                     fit: BoxFit.cover,
                     height: 200,
                     width: double.infinity,
@@ -48,9 +48,9 @@ class FeedScreen extends StatelessWidget {
             ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) => builderPostItem(context,cubit.posts[index]),
+              itemBuilder: (context, index) => builderPostItem(context,cubit.posts[index],index),
               separatorBuilder: (context,index ) => const SizedBox(height: 8,),
-              itemCount: 10,
+              itemCount: cubit.posts.length,
             ),
             const SizedBox(height: 8,),
           ],
@@ -62,7 +62,7 @@ class FeedScreen extends StatelessWidget {
 );
   }
 
-  Widget builderPostItem(context,PostModel model) {
+  Widget builderPostItem(context,PostModel model, index) {
     return Card(
       clipBehavior: Clip.antiAliasWithSaveLayer,
       margin: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
@@ -76,7 +76,8 @@ class FeedScreen extends StatelessWidget {
                  CircleAvatar(
                   radius: 25,
                   backgroundImage: NetworkImage(
-                      model.image),
+                    model.image
+                  ),
                 ),
                 const SizedBox(
                   width: 20,
@@ -175,7 +176,7 @@ class FeedScreen extends StatelessWidget {
             // //     ),
             // //   ),
             // // ),
-
+            if(model.postImage != '')
             Padding(
               padding: EdgeInsetsDirectional.only(top: 10),
               child: Container(
@@ -183,9 +184,9 @@ class FeedScreen extends StatelessWidget {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    image: const DecorationImage(
+                    image:  DecorationImage(
                       image: NetworkImage(
-                        'https://www.sayidaty.net/sites/default/files/styles/600x380/public/2023-03/222113.jpg?h=ea95bb15',
+                        model.postImage,
                       ),
                       fit: BoxFit.cover,
                     ),
@@ -208,7 +209,7 @@ class FeedScreen extends StatelessWidget {
                             width: 5,
                           ),
                           Text(
-                            '350',
+                             '${SocialCubit.get(context).likes[index]}',
                             style: Theme.of(context).textTheme.bodySmall,
                           )
                         ],
@@ -255,10 +256,10 @@ class FeedScreen extends StatelessWidget {
                   child: InkWell(
                     child: Row(
                       children: [
-                        const CircleAvatar(
+                         CircleAvatar(
                           radius: 25,
                           backgroundImage: NetworkImage(
-                              'https://www.sayidaty.net/sites/default/files/styles/600x380/public/2023-03/222113.jpg?h=ea95bb15'),
+                            SocialCubit.get(context).userModel.image,),
                         ),
                         const SizedBox(
                           width: 20,
@@ -286,12 +287,14 @@ class FeedScreen extends StatelessWidget {
                         width: 5,
                       ),
                       Text(
-                        '350',
+                        'Like',
                         style: Theme.of(context).textTheme.bodySmall,
                       )
                     ],
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    SocialCubit.get(context).likePost(SocialCubit.get(context).postsId[index]);
+                  },
                 ),
               ],
             )
