@@ -230,29 +230,33 @@ class SocialCubit extends Cubit<SocialState> {
     }
   }
 
-  void uploadcreateNewPost({
-    @required String name,
-    @required String uid,
-    @required String image,
-    @required String dateTime,
-    @required String text,
-  }) {
-    emit(SocialCreatePostLoadingState());
-    firebase_storage.FirebaseStorage.instance
-        .ref()
-        .child('users/${Uri.file(postImage.path).pathSegments.last}')
-        .putFile(postImage)
-        .then((value) {
-      value.ref.getDownloadURL().then((value) {
-        print(value);
-      }).catchError((error) {
-        print(error.toString());
-        emit(SocialCreatePostErrorState());
-      });
-    }).catchError((error) {
-      print(error.toString());
-      emit(SocialCreatePostErrorState());
-    });
+  // void uploadcreateNewPost({
+  //   @required String name,
+  //   @required String uid,
+  //   @required String image,
+  //   @required String dateTime,
+  //   @required String text,
+  // }) {
+  //   emit(SocialCreatePostLoadingState());
+  //   firebase_storage.FirebaseStorage.instance
+  //       .ref()
+  //       .child('users/${Uri.file(postImage.path).pathSegments.last}')
+  //       .putFile(postImage)
+  //       .then((value) {
+  //     value.ref.getDownloadURL().then((value) {
+  //       print(value);
+  //     }).catchError((error) {
+  //       print(error.toString());
+  //       emit(SocialCreatePostErrorState());
+  //     });
+  //   }).catchError((error) {
+  //     print(error.toString());
+  //     emit(SocialCreatePostErrorState());
+  //   });
+  // }
+  void removePostImage() {
+    postImage = null;
+    emit(SocialRemovePostImageState());
   }
 
   void uploadPostImage({
@@ -267,11 +271,11 @@ class SocialCubit extends Cubit<SocialState> {
         .then((value) {
       value.ref.getDownloadURL().then((value) {
         print(value);
-       createPost(
-           dateTime: dateTime,
-         text: text,
-         postImage: value,
-       );
+        createPost(
+          dateTime: dateTime,
+          text: text,
+          postImage: value,
+        );
       }).catchError((error) {
         print(error.toString());
         emit(SocialCreatePostErrorState());
@@ -281,7 +285,7 @@ class SocialCubit extends Cubit<SocialState> {
       emit(SocialCreatePostErrorState());
     });
   }
-
+///////// Create Post /////
   void createPost({
     @required String dateTime,
     @required String text,
@@ -297,11 +301,28 @@ class SocialCubit extends Cubit<SocialState> {
     );
     FirebaseFirestore.instance
         .collection('posts')
-        .doc('1')
-        .set(model.toMap())
-        .then((value) {})
-        .catchError((error) {
+        .add(model.toMap())
+        .then((value) {
+      emit(SocialCreatePostSuccessState());
+    }).catchError((error) {
       emit(SocialCreatePostErrorState());
+    });
+  }
+/////Get Post //////////
+  List<PostModel> posts = [];
+  void getPosts() {
+    FirebaseFirestore.instance
+        .collection('posts')
+        .get()
+        .then((value) {
+          value.docs.forEach((element) {
+            posts.add(PostModel.formjson(element.data()),);
+          });
+          emit(SocialGetPostsSuccessState());
+    })
+        .catchError((error) {
+          print(error.toString());
+          emit(SocialGetPostsErrorState());
     });
   }
 }

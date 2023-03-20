@@ -44,5 +44,14 @@ class SocialCreatePostSuccessState extends SocialState{}
 
 class SocialCreatePostErrorState extends SocialState{}
 
+class SocialRemovePostImageState extends SocialState{}
+
+/////////Get Posts////////////
+class SocialGetPostsLoadingState extends SocialState{}
+
+class SocialGetPostsSuccessState extends SocialState{}
+
+class SocialGetPostsErrorState extends SocialState{}
+
 
 

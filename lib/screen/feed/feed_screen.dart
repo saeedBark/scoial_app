@@ -1,51 +1,68 @@
+import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:social_app/layout/cubit/cubit.dart';
+import 'package:social_app/layout/cubit/state.dart';
+import 'package:social_app/model/post_model.dart';
 
 class FeedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      child: Column(
-        children: [
-          Card(
-            clipBehavior: Clip.antiAliasWithSaveLayer,
-            elevation: 20,
-            margin: const EdgeInsets.all(8),
-            child: Stack(
-              alignment: Alignment.bottomRight,
-              children: [
-                Image.network(
-                  'https://www.eu-startups.com/wp-content/uploads/2022/10/Screen-Shot-2022-10-04-at-10.06.13.png',
-                  fit: BoxFit.cover,
-                  height: 200,
-                  width: double.infinity,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Text(
-                    'communicate with friends',
-                    style: Theme.of(context).textTheme.subtitle1.copyWith(
-                          color: Colors.white,
-                        ),
+    return BlocConsumer<SocialCubit, SocialState>(
+  listener: (context, state) {
+    // TODO: implement listener
+  },
+  builder: (context, state) {
+    var cubit = SocialCubit.get(context);
+    return ConditionalBuilder(
+      condition:cubit.posts.length > 0,
+      builder: (context) => SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            Card(
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              elevation: 20,
+              margin: const EdgeInsets.all(8),
+              child: Stack(
+                alignment: Alignment.bottomRight,
+                children: [
+                  Image.network(
+                    'https://www.eu-startups.com/wp-content/uploads/2022/10/Screen-Shot-2022-10-04-at-10.06.13.png',
+                    fit: BoxFit.cover,
+                    height: 200,
+                    width: double.infinity,
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Text(
+                      'communicate with friends',
+                      style: Theme.of(context).textTheme.subtitle1.copyWith(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) => builderPostItem(context),
-            separatorBuilder: (context,index ) => const SizedBox(height: 8,),
-            itemCount: 10,
-          ),
-          const SizedBox(height: 8,),
-        ],
+            ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) => builderPostItem(context,cubit.posts[index]),
+              separatorBuilder: (context,index ) => const SizedBox(height: 8,),
+              itemCount: 10,
+            ),
+            const SizedBox(height: 8,),
+          ],
+        ),
       ),
+      fallback:(context) => Center(child: CircularProgressIndicator()),
     );
+  },
+);
   }
 
-  Widget builderPostItem(context) {
+  Widget builderPostItem(context,PostModel model) {
     return Card(
       clipBehavior: Clip.antiAliasWithSaveLayer,
       margin: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
@@ -56,10 +73,10 @@ class FeedScreen extends StatelessWidget {
           children: [
             Row(
               children: [
-                const CircleAvatar(
+                 CircleAvatar(
                   radius: 25,
                   backgroundImage: NetworkImage(
-                      'https://www.sayidaty.net/sites/default/files/styles/600x380/public/2023-03/222113.jpg?h=ea95bb15'),
+                      model.image),
                 ),
                 const SizedBox(
                   width: 20,
@@ -70,8 +87,8 @@ class FeedScreen extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          const Text(
-                            'Saeed bark',
+                           Text(
+                            model.name,
                             style: TextStyle(
                               height: 1.3,
                             ),
@@ -87,7 +104,7 @@ class FeedScreen extends StatelessWidget {
                         ],
                       ),
                       Text(
-                        'march 21,5,2023 at 10: pm',
+                        model.dateTime,
                         style: Theme.of(context).textTheme.bodySmall.copyWith(
                               height: 1.3,
                             ),
@@ -113,63 +130,67 @@ class FeedScreen extends StatelessWidget {
               ),
             ),
             Text(
-              'Teaching is a highly complex activity.[6] This is partially because teaching is a social practice, that takes place in a specific context (time, place, culture, socio-political-economic situation etc.) and therefore is shaped by the values of that specific context.[7] Factors that influence what is expected (or required) of teachers include history and tradition, social views about the purpose of education, accepted theories about',
+             model.text,
               style: Theme.of(context).textTheme.titleMedium,
             ),
+            // // Padding(
+            // //   padding: const EdgeInsets.symmetric(vertical: 8.0),
+            // //   child: Container(
+            // //     width: double.infinity,
+            // //     child: Wrap(
+            // //       children: [
+            // //         Padding(
+            // //           padding: const EdgeInsetsDirectional.only(end: 10),
+            // //           child: Container(
+            // //             height: 25,
+            // //             child: MaterialButton(
+            // //               padding: EdgeInsets.zero,
+            // //               minWidth: 1,
+            // //               onPressed: () {},
+            // //               child: Text('#software',
+            // //                   style: Theme.of(context)
+            // //                       .textTheme
+            // //                       .titleLarge
+            // //                       .copyWith(color: Colors.blue)),
+            // //             ),
+            // //           ),
+            // //         ),
+            // //         Padding(
+            // //           padding: const EdgeInsetsDirectional.only(end: 10),
+            // //           child: Container(
+            // //             height: 25,
+            // //             child: MaterialButton(
+            // //               padding: EdgeInsets.zero,
+            // //               minWidth: 1,
+            // //               onPressed: () {},
+            // //               child: Text('#flutter',
+            // //                   style: Theme.of(context)
+            // //                       .textTheme
+            // //                       .titleLarge
+            // //                       .copyWith(color: Colors.blue)),
+            // //             ),
+            // //           ),
+            // //         ),
+            // //       ],
+            // //     ),
+            // //   ),
+            // // ),
+
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              padding: EdgeInsetsDirectional.only(top: 10),
               child: Container(
-                width: double.infinity,
-                child: Wrap(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsetsDirectional.only(end: 10),
-                      child: Container(
-                        height: 25,
-                        child: MaterialButton(
-                          padding: EdgeInsets.zero,
-                          minWidth: 1,
-                          onPressed: () {},
-                          child: Text('#software',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge
-                                  .copyWith(color: Colors.blue)),
-                        ),
+                  height: 140,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    image: const DecorationImage(
+                      image: NetworkImage(
+                        'https://www.sayidaty.net/sites/default/files/styles/600x380/public/2023-03/222113.jpg?h=ea95bb15',
                       ),
+                      fit: BoxFit.cover,
                     ),
-                    Padding(
-                      padding: const EdgeInsetsDirectional.only(end: 10),
-                      child: Container(
-                        height: 25,
-                        child: MaterialButton(
-                          padding: EdgeInsets.zero,
-                          minWidth: 1,
-                          onPressed: () {},
-                          child: Text('#flutter',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge
-                                  .copyWith(color: Colors.blue)),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                  )),
             ),
-            Container(
-                height: 140,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  image: const DecorationImage(
-                    image: NetworkImage(
-                      'https://www.sayidaty.net/sites/default/files/styles/600x380/public/2023-03/222113.jpg?h=ea95bb15',
-                    ),
-                    fit: BoxFit.cover,
-                  ),
-                )),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15),
               child: Row(
