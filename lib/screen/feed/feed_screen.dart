@@ -134,48 +134,7 @@ class FeedScreen extends StatelessWidget {
              model.text,
               style: Theme.of(context).textTheme.titleMedium,
             ),
-            // // Padding(
-            // //   padding: const EdgeInsets.symmetric(vertical: 8.0),
-            // //   child: Container(
-            // //     width: double.infinity,
-            // //     child: Wrap(
-            // //       children: [
-            // //         Padding(
-            // //           padding: const EdgeInsetsDirectional.only(end: 10),
-            // //           child: Container(
-            // //             height: 25,
-            // //             child: MaterialButton(
-            // //               padding: EdgeInsets.zero,
-            // //               minWidth: 1,
-            // //               onPressed: () {},
-            // //               child: Text('#software',
-            // //                   style: Theme.of(context)
-            // //                       .textTheme
-            // //                       .titleLarge
-            // //                       .copyWith(color: Colors.blue)),
-            // //             ),
-            // //           ),
-            // //         ),
-            // //         Padding(
-            // //           padding: const EdgeInsetsDirectional.only(end: 10),
-            // //           child: Container(
-            // //             height: 25,
-            // //             child: MaterialButton(
-            // //               padding: EdgeInsets.zero,
-            // //               minWidth: 1,
-            // //               onPressed: () {},
-            // //               child: Text('#flutter',
-            // //                   style: Theme.of(context)
-            // //                       .textTheme
-            // //                       .titleLarge
-            // //                       .copyWith(color: Colors.blue)),
-            // //             ),
-            // //           ),
-            // //         ),
-            // //       ],
-            // //     ),
-            // //   ),
-            // // ),
+
             if(model.postImage != '')
             Padding(
               padding: EdgeInsetsDirectional.only(top: 10),

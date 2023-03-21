@@ -7,7 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:social_app/componets/componets.dart';
 import 'package:social_app/layout/cubit/state.dart';
 import 'package:social_app/model/post_model.dart';
-import 'package:social_app/model/usreRegister_model.dart';
+import 'package:social_app/model/user_model.dart';
 import 'package:social_app/screen/chat/chat_screen.dart';
 import 'package:social_app/screen/feed/feed_screen.dart';
 import 'package:social_app/screen/post/newPost_screen.dart';
@@ -347,6 +347,19 @@ class SocialCubit extends Cubit<SocialState> {
     }).catchError((error) {
       print(error.toString());
       emit(SocialLikesPostErrorState());
+    });
+  }
+
+  List<UserModel> users = [];
+  void getAllUsers(){
+    FirebaseFirestore.instance.collection('users').get().then((value) {
+      value.docs.forEach((element) {
+      users.add(UserModel.formjson(element.data()));
+      });
+      emit(SocialGetAllUsersSuccessState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(SocialGetAllUsersErrorState());
     });
   }
 }

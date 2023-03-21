@@ -58,3 +58,8 @@ class SocialLikesPostSuccessState extends SocialState{}
 
 class SocialLikesPostErrorState extends SocialState{}
 
+////////// get all users //////
+
+class SocialGetAllUsersSuccessState extends SocialState{}
+
+class SocialGetAllUsersErrorState extends SocialState{}
