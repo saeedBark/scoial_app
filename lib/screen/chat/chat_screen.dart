@@ -1,9 +1,12 @@
+
+
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/layout/cubit/cubit.dart';
 import 'package:social_app/layout/cubit/state.dart';
 import 'package:social_app/model/user_model.dart';
+import 'package:social_app/screen/chat/chat_detail_screen.dart';
 
 class ChatScreen extends StatelessWidget {
   @override
@@ -18,7 +21,7 @@ class ChatScreen extends StatelessWidget {
           condition: cubit.users.length > 0,
           builder:(context) => ListView.separated(
             physics: BouncingScrollPhysics(),
-            itemBuilder: (context, index) => builderItem(cubit.users[index]),
+            itemBuilder: (context, index) => builderItem(cubit.users[index],context),
             separatorBuilder: (context, index) => SizedBox(
               height: 10,
             ),
@@ -30,8 +33,12 @@ class ChatScreen extends StatelessWidget {
     );
   }
 
-  Widget builderItem(UserModel model) => InkWell(
-        onTap: () {},
+  Widget builderItem(UserModel model,context) => InkWell(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatDetailsScreen(
+            userModel: model,
+          )));
+        },
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Row(
@@ -39,13 +46,13 @@ class ChatScreen extends StatelessWidget {
               CircleAvatar(
                 radius: 25,
                 backgroundImage: NetworkImage(
-                    model.image),
+                   '${ model.image}'),
               ),
               SizedBox(
                 width: 20,
               ),
               Text(
-                model.name,
+                '${model.name}',
                 style: TextStyle(
                   height: 1.3,
                 ),
