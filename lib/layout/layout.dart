@@ -26,11 +26,11 @@ class LayoutScreen extends StatelessWidget {
           appBar: AppBar(
             title: Text(
               cubit.title[cubit.currentIndex],
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
             ),
             actions: [
-              IconButton(onPressed: (){}, icon: Icon(Icons.notification_important_outlined)),
-              IconButton(onPressed: (){}, icon: Icon(Icons.search)),
+              IconButton(onPressed: (){}, icon: const Icon(Icons.notification_important_outlined)),
+              IconButton(onPressed: (){}, icon: const Icon(Icons.search)),
             ],
             // backgroundColor: Colors.white,
             // elevation: 0,

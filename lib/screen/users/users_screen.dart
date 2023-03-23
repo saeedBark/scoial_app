@@ -12,6 +12,6 @@ class UsersScreen extends StatelessWidget {
       SharedPreferenceCach.logout(key: 'uId').then((value) {
         navigatorAndReplace(context, LoginScreen());
       });
-    },child: Icon(Icons.add),);
+    },child: const Icon(Icons.add),);
   }
 }

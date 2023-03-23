@@ -56,7 +56,7 @@ class EditProfileScreen extends StatelessWidget {
               child: Column(
                 children: [
                   if (state is SocialUdateUserLoadingState)
-                    LinearProgressIndicator(),
+                    const LinearProgressIndicator(),
                   Container(
                     height: 190,
                     child: Stack(
@@ -137,7 +137,7 @@ class EditProfileScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   if (cubit.profileImage != null || cubit.coverImage != null)
@@ -157,12 +157,12 @@ class EditProfileScreen extends StatelessWidget {
                                   },
                                   text: 'Upload Profile '),
                               if (state is SocialUdateUserLoadingState)
-                              SizedBox(height: 5,),
+                              const SizedBox(height: 5,),
                               if (state is SocialUdateUserLoadingState)
-                              LinearProgressIndicator(),
+                              const LinearProgressIndicator(),
                             ],
                           )),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         if (cubit.coverImage != null)
@@ -178,15 +178,15 @@ class EditProfileScreen extends StatelessWidget {
                                   },
                                   text: 'Upload Cover '),
                               if (state is SocialUdateUserLoadingState)
-                              SizedBox(height: 5,),
+                              const SizedBox(height: 5,),
                               if (state is SocialUdateUserLoadingState)
-                              LinearProgressIndicator(),
+                              const LinearProgressIndicator(),
                             ],
                           )),
                       ],
                     ),
                   if (cubit.profileImage != null || cubit.coverImage != null)
-                    SizedBox(
+                    const SizedBox(
                       height: 25,
                     ),
                   defaultFormFile(
@@ -201,7 +201,7 @@ class EditProfileScreen extends StatelessWidget {
                       return null;
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   defaultFormFile(
@@ -216,7 +216,7 @@ class EditProfileScreen extends StatelessWidget {
                       return null;
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   defaultFormFile(

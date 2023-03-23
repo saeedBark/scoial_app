@@ -20,14 +20,14 @@ class ChatScreen extends StatelessWidget {
         return ConditionalBuilder(
           condition: cubit.users.length > 0,
           builder:(context) => ListView.separated(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             itemBuilder: (context, index) => builderItem(cubit.users[index],context),
-            separatorBuilder: (context, index) => SizedBox(
+            separatorBuilder: (context, index) => const SizedBox(
               height: 10,
             ),
             itemCount: cubit.users.length,
           ),
-          fallback:(context) => Center(child: CircularProgressIndicator()) ,
+          fallback:(context) => const Center(child: CircularProgressIndicator()) ,
         );
       },
     );
@@ -48,12 +48,12 @@ class ChatScreen extends StatelessWidget {
                 backgroundImage: NetworkImage(
                    '${ model.image}'),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
               Text(
                 '${model.name}',
-                style: TextStyle(
+                style: const TextStyle(
                   height: 1.3,
                 ),
               ),

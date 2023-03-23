@@ -56,7 +56,7 @@ class FeedScreen extends StatelessWidget {
           ],
         ),
       ),
-      fallback:(context) => Center(child: CircularProgressIndicator()),
+      fallback:(context) => const Center(child: CircularProgressIndicator()),
     );
   },
 );
@@ -90,7 +90,7 @@ class FeedScreen extends StatelessWidget {
                         children: [
                            Text(
                             model.name,
-                            style: TextStyle(
+                            style: const TextStyle(
                               height: 1.3,
                             ),
                           ),
@@ -137,7 +137,7 @@ class FeedScreen extends StatelessWidget {
 
             if(model.postImage != '')
             Padding(
-              padding: EdgeInsetsDirectional.only(top: 10),
+              padding: const EdgeInsetsDirectional.only(top: 10),
               child: Container(
                   height: 140,
                   width: double.infinity,
