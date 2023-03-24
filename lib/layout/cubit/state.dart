@@ -63,3 +63,17 @@ class SocialLikesPostErrorState extends SocialState{}
 class SocialGetAllUsersSuccessState extends SocialState{}
 
 class SocialGetAllUsersErrorState extends SocialState{}
+///////////// Chat ///////////////////
+///////////// send message //////////
+
+class SocialSendMessageSuccessState extends SocialState{}
+
+class SocialSendMessageErrorState extends SocialState{
+  final String error ;
+  SocialSendMessageErrorState( this.error);
+}
+//////////// get message ////////
+
+class SocialGetMessageSuccessState extends SocialState{}
+
+class SocialGetMessageErrorState extends SocialState{}
