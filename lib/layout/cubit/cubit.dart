@@ -388,22 +388,46 @@ class SocialCubit extends Cubit<SocialState> {
         .collection('chats')
         .doc(reciveId)
         .collection('messages')
-        .add(model.toMap()).then((value) {
-          emit(SocialSendMessageSuccessState());
-    }).catchError((error){
+        .add(model.toMap())
+        .then((value) {
+      emit(SocialSendMessageSuccessState());
+    }).catchError((error) {
       emit(SocialSendMessageErrorState(error.toString()));
     });
- //// set recive chats //////
+    //// set recive chats //////
     FirebaseFirestore.instance
         .collection('users')
         .doc(reciveId)
         .collection('chats')
         .doc(userModel.uid)
         .collection('messages')
-        .add(model.toMap()).then((value) {
+        .add(model.toMap())
+        .then((value) {
       emit(SocialSendMessageSuccessState());
-    }).catchError((error){
+    }).catchError((error) {
       emit(SocialSendMessageErrorState(error.toString()));
+    });
+  }
+
+  List<MessageModel> messages = [];
+
+  void getMessage({
+    @required String reciveId,
+  }) {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(userModel.uid)
+        .collection('chats')
+        .doc(reciveId)
+        .collection('messages')
+    .orderBy('dateTime')
+        .snapshots()
+        .listen((event) {
+          messages = [];
+      event.docs.forEach((element) {
+        messages.add(MessageModel.formjson(element.data()));
+      });
+      emit(SocialGetMessageSuccessState());
     });
   }
 }
