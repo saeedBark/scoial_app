@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,13 +10,37 @@ import 'package:social_app/remote/sharedPreference/shared_preference.dart';
 import 'package:social_app/screen/login/login_screen.dart';
 import 'package:social_app/style/bloc_observe.dart';
 
+Future<void> firebaseMessagingBackgroundHander(RemoteMessage message) async
+{
+  print('on background message');
+  print(message.data.toString());
+  showToast(text: 'on message',color: Colors.green);
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Bloc.observer = MyBlocObserver();
   await Firebase.initializeApp();
+  var token = await FirebaseMessaging.instance.getToken();
+  print(token);
+  // at application recive notification
+  FirebaseMessaging.onMessage.listen((event) {
+    print('on message');
+    print(event.data.toString());
+    showToast(text: 'on message',color: Colors.green);
+
+  });
+
+  // when click on notification to open app background
+
+  FirebaseMessaging.onMessageOpenedApp.listen((event) {
+    print('on message opened app');
+    print(event.data.toString());
+    showToast(text: 'on message opened app' ,color: Colors.blue);
+  });
+  // background fcm
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHander);
+  Bloc.observer = MyBlocObserver();
   await SharedPreferenceCach.inti();
-
-
 
   Widget widget;
   if (uId != null) {

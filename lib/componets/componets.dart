@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:social_app/remote/sharedPreference/shared_preference.dart';
 import 'package:social_app/style/colors.dart';
 
@@ -99,3 +100,18 @@ Widget defaultButton({
 /////////
 
 var uId = SharedPreferenceCach.getData(key: 'uId');
+
+////////// ShowToast //////
+Future<bool> showToast({
+  String text ,
+  Color color,
+}) {
+  return Fluttertoast.showToast(
+      msg: text,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: color,
+      //textColor: Colors.white,
+      fontSize: 16.0);
+}

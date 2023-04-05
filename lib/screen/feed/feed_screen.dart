@@ -9,13 +9,13 @@ class FeedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SocialCubit, SocialState>(
-  listener: (context, state) {
+     listener: (context, state) {
     // TODO: implement listener
   },
   builder: (context, state) {
     var cubit = SocialCubit.get(context);
     return ConditionalBuilder(
-      condition:cubit.posts.isNotEmpty && cubit.userModel != null,
+      condition: cubit.posts.length > 0 && cubit.userModel != null,
       builder: (context) => SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
